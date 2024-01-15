@@ -1,71 +1,46 @@
-# Getting Started with Create React App
+# Music Taste
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hey all welcome to this practice takehome challenge
 
-## Available Scripts
+**To get started with this challenge, you need to fork this repository.**
 
-In the project directory, you can run:
+In the `streamingData` folder, you will find 9 JSON files. These files contain a year's worth of streaming history from Spotify, with roughly 80,000 song entries.
 
-### `npm start`
+The json will look like the following:
+```json
+[
+ {
+    "endTime" : "2022-08-20 00:02",
+    "artistName" : "Maroon 5",
+    "trackName" : "How",
+    "msPlayed" : 216600
+  },
+  {
+    "endTime" : "2022-08-20 00:04",
+    "artistName" : "A Great Big World",
+    "trackName" : "I Don't Wanna Love Somebody Else",
+    "msPlayed" : 163960
+  },
+  {
+    "endTime" : "2022-08-20 00:08",
+    "artistName" : "Anna Clendening",
+    "trackName" : "Boys Like You - Acoustic",
+    "msPlayed" : 238576
+  }
+]
+```
+Your task is to collect all this data and present it in a more human-readable format.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You will need to produce two outputs: one for songs by count, and the other for artists by count. Additionally, for each song in the output, you should list the count and total time spent listening to that song, broken down into a `dd days hh hours mm minutes ss seconds` format. They should be sorted by count plays
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+I have been vauge with exactly how the output should look like since you will be able to use whatever tech or languge you want, that being said, you shouldn't use one that completes this challenge for you (not sure if it exist, but just in case)
 
-### `npm test`
+you can return it as an xlsx file, or as a frontend with react, the choice is yours.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+to give you a better idea of what the output should look like, here is an example of what a solution could look like. (this would be for songs by count, there should also be one for artist by count)
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# My-music-app
+| Song Title                       | Count | Time                                       |
+|----------------------------------|-------|--------------------------------------------|
+| For All you give                 | 635   | 1 days, 9 hours, 22 minutes, 56.19 seconds |
+| Crazier Things (with Noah Kahan) | 356   | 1 days, 1 hours, 41 minutes, 46.26 seconds |
+| Wish on an Eyelash, Pt. 2        | 329   | 16 hours, 43 minutes, 30.6 seconds         |
