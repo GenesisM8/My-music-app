@@ -1,0 +1,3 @@
+[submodule "my-music-app"]
+	path = my-music-app
+	url = https://github.com/GenesisM8/musicTaste2.git
