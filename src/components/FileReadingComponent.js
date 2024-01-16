@@ -1,52 +1,51 @@
-// src/components/FileReadingComponent.js
 import React, { useState, useEffect } from 'react';
 import './FileReadingComponent.css';
 
 const FileReadingComponent = () => {
   const [fileData, setFileData] = useState([]);
+  const [selectedTable, setSelectedTable] = useState('songs'); // Default selected table
 
   useEffect(() => {
     const fetchData = async () => {
-    
-        // Fetch data from JSON files
-        const responses = await Promise.all([
-          fetch('/streamingData/StreamingHistory0.json'),
-          fetch('/streamingData/StreamingHistory1.json'),
-          fetch('/streamingData/StreamingHistory2.json'),
-          fetch('/streamingData/StreamingHistory3.json'),
-          fetch('/streamingData/StreamingHistory4.json'),
-          fetch('/streamingData/StreamingHistory5.json'),
-          fetch('/streamingData/StreamingHistory6.json'),
-          fetch('/streamingData/StreamingHistory7.json'),
-          fetch('/streamingData/StreamingHistory8.json'),
-        ]);
+      // Fetch data from JSON files
+      const responses = await Promise.all([
+        fetch('/streamingData/StreamingHistory0.json'),
+        fetch('/streamingData/StreamingHistory1.json'),
+        fetch('/streamingData/StreamingHistory2.json'),
+        fetch('/streamingData/StreamingHistory3.json'),
+        fetch('/streamingData/StreamingHistory4.json'),
+        fetch('/streamingData/StreamingHistory5.json'),
+        fetch('/streamingData/StreamingHistory6.json'),
+        fetch('/streamingData/StreamingHistory7.json'),
+        fetch('/streamingData/StreamingHistory8.json'),
+      ]);
 
-        // Parse the responses
-        const jsonData = await Promise.all(responses.map((response) => response.json()));
+      // Parse the responses
+      const jsonData = await Promise.all(responses.map((response) => response.json()));
 
-        // Combine data from multiple files
-        const mergedData = jsonData.reduce((acc, fileData) => acc.concat(fileData), []);
+      // Combine data from multiple files
+      const mergedData = jsonData.reduce((acc, fileData) => acc.concat(fileData), []);
 
-        setFileData(mergedData);
+      setFileData(mergedData);
     };
 
     fetchData();
   }, []);
 
   const renderResults = () => {
-    // Calculate count and total time for each song
+    // Calculate count and total time for each song 
 
-    const songCounts = {};
+    const counts = {};
     //store total time played
-    const songTimes = {};
+    const times = {};
 
-    fileData.forEach((song) => {
-      //unique key for each song trackName
-      const key = song.trackName;
+    fileData.forEach((entry) => {
+      //unique key for each song trackName or artistName
+      const key = selectedTable === 'songs' ? entry.trackName : entry.artistName;
       //increment the count if the song already exists
-      songCounts[key] = (songCounts[key] || 0) + 1;
+      counts[key] = (counts[key] || 0) + 1;
       //increment the total time played by msPlayed
-      songTimes[key] = (songTimes[key] || 0) + song.msPlayed;
+      times[key] = (times[key] || 0) + entry.msPlayed;
     });
 
     // Convert total time to dd days hh hours mm minutes ss seconds format
@@ -59,30 +58,35 @@ const FileReadingComponent = () => {
       return `${days} days, ${hours % 24} hours, ${minutes % 60} minutes, ${seconds % 60} seconds`;
     };
 
-    // Create an array of song data for rendering
-    const songData = Object.keys(songCounts).map((key) => ({
+    // Create an array of data for rendering
+    const data = Object.keys(counts).map((key) => ({
       title: key,
-      count: songCounts[key],
-      time: formatTime(songTimes[key]),
+      count: counts[key],
+      time: formatTime(times[key]),
     }));
 
     // Sort the array by count in descending order
-    songData.sort((a, b) => b.count - a.count);
+    data.sort((a, b) => b.count - a.count);
 
-    // Example: Displaying song titles, counts, and time
+    // Example: Displaying titles, counts, and time in the table
     return (
-     <div>
-        <h2>Songs by Count</h2>
+      <div>
+        <label>
+          <select value={selectedTable} onChange={(e) => setSelectedTable(e.target.value)} className="select-input">
+            <option value="songs">Songs by Count</option>
+            <option value="artists">Artists by Count</option>
+          </select>
+        </label>
         <table className="song-table">
           <thead>
             <tr>
-              <th>Song Title</th>
+              <th>{selectedTable === 'songs' ? 'Song Title' : 'Artist Name'}</th>
               <th>Count</th>
               <th>Time</th>
             </tr>
           </thead>
           <tbody>
-            {songData.map((entry, index) => (
+            {data.map((entry, index) => (
               <tr key={index}>
                 <td>{entry.title}</td>
                 <td>{entry.count}</td>

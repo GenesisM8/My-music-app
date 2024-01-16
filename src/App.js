@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Music Taste</h1>
+      <h1 className='h1'>Music Taste</h1>
       <FileReadingComponent onFileRead={handleFileRead} />
     </div>
   );
