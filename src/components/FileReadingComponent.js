@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './FileReadingComponent.css';
 
 const FileReadingComponent = () => {
+  // State initialization
   const [fileData, setFileData] = useState([]);
   const [selectedTable, setSelectedTable] = useState('songs'); // Default selected table
 
@@ -23,9 +24,10 @@ const FileReadingComponent = () => {
       // Parse the responses
       const jsonData = await Promise.all(responses.map((response) => response.json()));
 
-      // Combine data from multiple files
+      // Combine data from multiple files into a single array
       const mergedData = jsonData.reduce((acc, fileData) => acc.concat(fileData), []);
 
+      // Update fileData state with merged data
       setFileData(mergedData);
     };
 
@@ -35,8 +37,8 @@ const FileReadingComponent = () => {
   const renderResults = () => {
     // Calculate count and total time for each song 
 
+    // Objects to store count and total time
     const counts = {};
-    //store total time played
     const times = {};
 
     fileData.forEach((entry) => {
@@ -68,7 +70,7 @@ const FileReadingComponent = () => {
     // Sort the array by count in descending order
     data.sort((a, b) => b.count - a.count);
 
-    // Example: Displaying titles, counts, and time in the table
+
     return (
       <div>
         <label>

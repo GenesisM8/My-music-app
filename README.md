@@ -1,3 +1,8 @@
+## Launching locally instructions:
+
+* Run "npm install" to install dependencies
+* Run "npm start" to boot up the frontend server and open a browser tab to the landing page
+
 # Music Taste
 
 Hey all welcome to this practice takehome challenge
