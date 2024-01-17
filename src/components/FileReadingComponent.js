@@ -36,7 +36,7 @@ const FileReadingComponent = () => {
 
   const renderResults = () => {
     // Calculate count and total time for each song 
-
+    
     // Objects to store count and total time
     const counts = {};
     const times = {};
